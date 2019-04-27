@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="icon" href="../images/favicon.ico">
+    <title>列表</title>
+</head>
+<body>
+<div>
+    <a href="http://mp.weixin.qq.com/s?__biz=MjM5Mjg4ODk0NQ==&mid=2652772422&idx=1&sn=d5d2fc850e3506d30ff423dea34c8925&chksm=bd75d9588a02504e6b155fa973aaf0222cf0dfd64d45448bfbf70121f18183a3f132f5c85d51&scene=27#wechat_redirect">链接1</a>
+    <a href="http://mp.weixin.qq.com/s?__biz=MjM5Mjg4ODk0NQ==&mid=2652772422&idx=2&sn=8e69717685473f754151dcf96d1ecd0a&chksm=bd75d9588a02504e7bba1f57eca26e7a9c45343a3b454cdac568af0a1ec80362c42d647272a8&scene=27#wechat_redirect">链接2</a>
+    <a href="http://mp.weixin.qq.com/s?__biz=MjM5Mjg4ODk0NQ==&mid=2652772422&idx=3&sn=b876b7da4a1ceb7ceb9540242015b83c&chksm=bd75d9588a02504ebba6b9e0e588a1982c6b7e18b2a1328b57d6e5d650b3ae6ad8349726e879&scene=27#wechat_redirect">链接3</a>
+</div>
+</body>
+<script>
+    window.onbeforeunload=function(){
+　　var e = window.event||e;
+　　localStorage.setItem("lastOpen",Date.parse(new Date()));
+}
+    //window.onload = function () {
+    //    var now = Date.parse(new Date());
+    //    var lastOpen = localStorage.getItem("lastOpen")!=null?localStorage.getItem("lastOpen"):0;
+    //    alert("浏览时长:"+(now-lastOpen)/1000+"秒");
+    //}
+    window.addEventListener("popstate", function(e) {
+        alert("我监听到了浏览器的返回按钮事件啦");//根据自己的需求实现自己的功能
+        var now = Date.parse(new Date());
+        var lastOpen = localStorage.getItem("lastOpen")!=null?localStorage.getItem("lastOpen"):0;
+        alert("浏览时长:"+(now-lastOpen)/1000+"秒");
+    }, false);
+</script>
+</html>
