@@ -60,8 +60,13 @@ def createMenu():
     print(req.text)
 
 
-def sendMsg():
-    p = json.dumps(TEMPLATE_MSG, ensure_ascii=False)
+def sendTemplateMsg(toUser="oIPLH1P31seTfvqU2Gvr852DHS_Q"):
+    msg = {
+           "touser":toUser,
+           "template_id":"B4oBg0f2ocIm0hMt--7SNswCGJlypWccZycQ5X8Twqc",
+           "url":"http://panghu.ngrok.xiaomiqiu.cn/list/",
+       }
+    p = json.dumps(msg, ensure_ascii=False)
     print("--->" + AccessToken.get_access_token())
     #https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=ACCESS_TOKEN
     postUrl = 'https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=%s' % AccessToken.get_access_token()
@@ -72,8 +77,8 @@ def sendMsg():
 def getUserList():
     getUrl = "https://api.weixin.qq.com/cgi-bin/user/get?access_token=%s&next_openid=%s" %(AccessToken.get_access_token(),NULL)
     rep = requests.get(getUrl)
-    print(json.loads(rep.text).get("data"))
+    return json.loads(rep.text).get("data")["openid"]
 
 
 if __name__ == '__main__':
-    getUserList()
+    print(getUserList())
