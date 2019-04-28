@@ -1,8 +1,8 @@
 TOKEN = "123"
-# APPID = "wx65bbb0c05f89b3af"
-# APPSECRET = "6152ef56c85bc4eb52f2d28c8ebea0f3"
-APPID = "wx69b71a53ddecce39"
-APPSECRET = "98ef3811227471523d01f1b5e0e1ad12"
+APPID = "wx65bbb0c05f89b3af"
+APPSECRET = "6152ef56c85bc4eb52f2d28c8ebea0f3"
+# APPID = "wx69b71a53ddecce39"
+# APPSECRET = "98ef3811227471523d01f1b5e0e1ad12"
 NULL = ""
 MENU =  {
      "button":[
@@ -39,7 +39,8 @@ MENU =  {
        }]
  }
 TEMPLATE_MSG = {
-           "touser":"oIPLH1PpcmFfP3SEnH2PZ9fAA-Tk",
+           "touser":"oIPLH1P31seTfvqU2Gvr852DHS_Q",
            "template_id":"B4oBg0f2ocIm0hMt--7SNswCGJlypWccZycQ5X8Twqc",
-           "url":"http://panghu.ngrok.xiaomiqiu.cn/list/",
+           # "url":"http://panghu.ngrok.xiaomiqiu.cn/list/",
+            "url":"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx65bbb0c05f89b3af&redirect_uri=http%3A%2F%2Fpanghu.ngrok.xiaomiqiu.cn%2Flist%2F&response_type=code&scope=snsapi_userinfo&state=STATE&#wechat_redirect"
        }
