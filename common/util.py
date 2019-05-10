@@ -1,7 +1,7 @@
 import requests
 import json
 
-from settings import TOKEN, MENU, TEMPLATE_MSG, NULL, URL
+from settings import TOKEN, MENU, TEMPLATE_MSG, NULL, URL,URL2
 import xml.etree.ElementTree as ET
 import hashlib
 from models import AccessToken
@@ -66,7 +66,7 @@ def sendTemplateMsg(toUser="oIPLH1P31seTfvqU2Gvr852DHS_Q"):
     msg = {
         "touser": toUser,
         "template_id": "GqFgli7w9_T-h2NKjVX18l5cZGnRiZ_RzMnCWe7lzs8",
-        "url": URL + "/list/",
+        "url": URL2 + "/list/",
         "data": {
             "first": {
                 "value":"推荐文章:",

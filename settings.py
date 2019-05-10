@@ -3,7 +3,8 @@ APPID = "wx65bbb0c05f89b3af"
 APPSECRET = "6152ef56c85bc4eb52f2d28c8ebea0f3"
 NULL = ""
 CHANNEL_ID = "410cb48655edf233"
-URL = "http://panghu.ngrok.xiaomiqiu.cn"
+URL = "http://xing.easy.echosite.cn"
+# URL2 = "http://3d13385c.tcp.ittun.com:3333"
 VIRTUAL_PHONE = 16739465440
 MENU =  {
      "button":[
@@ -23,7 +24,7 @@ MENU =  {
             {
                "type":"view",
                "name":"列表",
-               "url":"http://panghu.ngrok.xiaomiqiu.cn/list"
+               "url":"http://xing.easy.echosite.cn/list"
             },
             {
                  "type":"miniprogram",
