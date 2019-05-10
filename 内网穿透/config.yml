@@ -1,0 +1,10 @@
+server_addr: "easy.echosite.cn:4443"
+trust_host_root_certs: false
+echosite_id: "18683958697"
+echosite_token: "$2y$10$pNzj5tUWXJjQ0xcbp/X1RuJMd3zIdk3v8eU2sYU.RSfTXH6Spe7ja"
+tunnels:
+  name1:
+    subdomain: "xing"
+    proto:
+        http:
+          127.0.0.1:5000
