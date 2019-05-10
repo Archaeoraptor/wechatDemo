@@ -2,6 +2,9 @@ TOKEN = "123"
 APPID = "wx65bbb0c05f89b3af"
 APPSECRET = "6152ef56c85bc4eb52f2d28c8ebea0f3"
 NULL = ""
+CHANNEL_ID = "410cb48655edf233"
+URL = "http://panghu.ngrok.xiaomiqiu.cn"
+VIRTUAL_PHONE = 16739465440
 MENU =  {
      "button":[
      {
@@ -20,7 +23,7 @@ MENU =  {
             {
                "type":"view",
                "name":"列表",
-               "url":"http://panghu.ngrok.xiaomiqiu.cn/list/"
+               "url":"http://panghu.ngrok.xiaomiqiu.cn/list"
             },
             {
                  "type":"miniprogram",
@@ -38,6 +41,10 @@ MENU =  {
  }
 TEMPLATE_MSG = {
            "touser":"oIPLH1P31seTfvqU2Gvr852DHS_Q",
-           "template_id":"B4oBg0f2ocIm0hMt--7SNswCGJlypWccZycQ5X8Twqc",
-           "url":"http://panghu.ngrok.xiaomiqiu.cn/list/",
+           "template_id":"GqFgli7w9_T-h2NKjVX18l5cZGnRiZ_RzMnCWe7lzs8",
+           "url":URL +"/list/",
+            "data":{
+                "first":"推荐文章:",
+                "title":"【新闻聚焦】BTV新闻：积极推广防癌健康查体"
+            }
        }

@@ -1,0 +1,109 @@
+body {
+    min-width: 320px;
+    max-width: 640px;
+    margin: 0 auto;
+    color: #333;
+    padding: 0;
+    font-family: "Microsoft Yahei";
+    text-align: center;
+}
+.container {
+    /*width: 100%;*/
+    border: 1px solid #ccc;
+}
+.swiper1 {
+    width: 100%;
+}
+.swiper1 .selected {
+    color: #ec5566;
+    border-bottom: 2px solid #ec5566;
+}
+.swiper1 .swiper-slide {
+    text-align: center;
+    font-size: 16px;
+    height: 50px;
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    cursor: pointer;
+}
+.swiper2 {
+    width: 100%;
+}
+.swiper2 .swiper-slide {
+    height: calc(100vh - 50px);
+    background-color: #ccc;
+    color: #fff;
+    text-align: center;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+}
+.content{
+    margin: 0;
+    padding: 0;
+    text-align: left;
+}
+.item{
+    position: relative;
+    padding-left: 10px;
+    padding-bottom: 2px;
+    display: block;
+    border-bottom: 1px solid lightcyan;
+
+}
+.close_btn{
+    float: right;
+    margin-right: 10px;
+}
+#UpLayer span{
+    border:#fff 1px solid;
+    width:80px;
+    padding:0 5px;
+    line-height:20px;
+    display:block;
+}
+#UpLayer{
+    z-index: 999;
+    position: relative;
+    /*top: -27px;*/
+    width: 50px;
+    float: right;
+    right: 30px;
+    top: 4px;
+}
+#UpLayer ul{
+    display:none;
+    position:absolute;
+    border:#ccc 1px solid;
+    width:80px;
+    padding:5px;
+    line-height:20px;
+    background:#f1f1f1;
+    margin:-1px 0 0 0;
+}
+#UpLayer ul li{
+    list-style: none;
+    border-bottom:#ccc 1px dashed;
+}
+.from{
+    line-height: 30px;
+    padding: 0;
+    margin: 0;
+}
+.feedback{
+    background-color: #cccccc;
+    position: relative;
+    height: 30px;
+    float: right;
+    width: 40px;
+}
