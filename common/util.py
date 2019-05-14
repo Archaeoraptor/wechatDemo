@@ -1,7 +1,7 @@
 import requests
 import json
 
-from settings import TOKEN, MENU, TEMPLATE_MSG, NULL, URL,URL2
+from settings import TOKEN, MENU, TEMPLATE_MSG, NULL, URL
 import xml.etree.ElementTree as ET
 import hashlib
 from models import AccessToken
@@ -48,7 +48,7 @@ def createXML():
     fromUserName.text = "<![CDATA[" + "gh_9715d2592755" + "]]>"
     createTime.text = 1234567890
     msgType.text = "<![CDATA[" + "text" + "]]>"
-    content.text = "<![CDATA[" + "滚。。" + "]]>"
+    content.text = "<![CDATA[" + "123123" + "]]>"
     result = ET.Element(root)
     print(str(result))
     return result
@@ -66,7 +66,7 @@ def sendTemplateMsg(toUser="oIPLH1P31seTfvqU2Gvr852DHS_Q"):
     msg = {
         "touser": toUser,
         "template_id": "GqFgli7w9_T-h2NKjVX18l5cZGnRiZ_RzMnCWe7lzs8",
-        "url": URL2 + "/list/",
+        "url": URL + "/main",
         "data": {
             "first": {
                 "value":"推荐文章:",
@@ -98,5 +98,26 @@ def uploadForeverMaterial():
         AccessToken.get_access_token())
 
 
+def getOpenid():
+    url = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=%s&openid=OPENID" %AccessToken.get_access_token()
+    rep = requests.get(url)
+    return json.loads(rep.text).get("openid")
+
+
+def sendAll():
+    data = {
+   "filter":{
+      "is_to_all":True,
+   },
+   "text":{
+      "content":"CONTENT"
+   },
+    "msgtype":"text"
+}
+
+    url = "https://api.weixin.qq.com/cgi-bin/message/mass/sendall?access_token=%s" %AccessToken.get_access_token()
+    rep = requests.post(url,json.dumps(data))
+    print(rep.text)
+
 if __name__ == '__main__':
-    print(AccessToken.get_access_token())
+    print(sendAll())

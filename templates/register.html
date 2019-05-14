@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="user-scalable=no,width=device-width,initial-scale=1,maximum-scale=1">
+	<title>实名认证</title>
+	<link rel="stylesheet" type="text/css" href="/static/css/common.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/register.css">
+</head>
+<body>
+	<div class="nav">
+		<div class="nav_left"><a href="menu.html">&lt;</a></div>
+	</div>
+	<div class="register_cont">
+		<form>
+			<input class="input" id="name" placeholder="请输入姓名" type="text" name="name" maxlength="30">
+			<div class="hint">请输入姓名</div>
+			<input class="input" id="id_card" placeholder="请输入您的身份证证号码" type="text" name="idcard" maxlength="18">
+			<div class="hint">请输入您的证件号码</div>
+			<input class="input" id="user_email" placeholder="请正确填写邮箱地址" type="text" name="email" autocomplete="off">
+			<div class="hint">请正确填写邮箱地址</div>
+			<input class="input" id="phone" type="text" name="phone" aria-label="手机号码" placeholder="手机号码">
+			<div class="hint">请正确填写手机号码</div>
+			<input type="submit" id="submit" class="bt" name="button" value="提交">
+		</form>
+	</div>
+	<script type="text/javascript" src="/static/js/form.js"></script>
+</body>
+</html>

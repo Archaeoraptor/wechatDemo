@@ -2,8 +2,8 @@ import json
 import threading
 
 import requests
-from flask import Flask, request, Response, render_template, jsonify
-from common.util import validate_wx_public,parseXML,createXML,createMenu,sendTemplateMsg,getUserList
+from flask import Flask, request, Response, render_template, jsonify, redirect, url_for
+from common.util import validate_wx_public,parseXML,createXML,createMenu,sendTemplateMsg,getUserList,getOpenid
 from validate.form import WxpublicForm
 from settings import APPID,APPSECRET
 from flask_cors import *
@@ -65,18 +65,46 @@ def getList2():
     return render_template("index.html", openid = openid)
 
 
-@app.route('/record/',methods=["GET","POST"])
-def record():
-    data = request.json.get("data")
-    print(data)
-    return jsonify({
-        data:1
-    })
-
 @app.route('/index',methods=["GET","POST"])
 def index():
     return render_template("index.html")
 
+
+@app.route('/main',methods=["GET","POST"])
+def main_page():
+    return render_template("main.html")
+
+
+@app.route('/register',methods=["GET","POST"])
+def register():
+    username = request.json.get("username")
+    useremail = request.json.get("useremail")
+    phone = request.json.get("phone")
+    password = request.json.get("password")
+    return jsonify({
+        "flag":1
+    })
+
+
+@app.route('/login',methods=["GET","POST"])
+def login():
+    username = request.json.get("username")
+    password = request.json.get("password")
+    print(username)
+    print(password)
+    return jsonify({
+        "flag":1
+    })
+
+
+@app.route('/forget',methods=["GET","POST"])
+def forget():
+    if(request.method=="GET"):
+        return render_template("forget.html")
+    if(request.method=="POST"):
+        return jsonify({
+            "flag":1
+        })
 
 if __name__ == '__main__':
     app.run()

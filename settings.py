@@ -1,11 +1,9 @@
+RUN = "echosite -config=config.yml start-all"
 TOKEN = "123"
 APPID = "wx65bbb0c05f89b3af"
 APPSECRET = "6152ef56c85bc4eb52f2d28c8ebea0f3"
 NULL = ""
-CHANNEL_ID = "410cb48655edf233"
 URL = "http://xing.easy.echosite.cn"
-# URL2 = "http://3d13385c.tcp.ittun.com:3333"
-VIRTUAL_PHONE = 16739465440
 MENU =  {
      "button":[
      {
@@ -19,7 +17,7 @@ MENU =  {
            {
                "type":"view",
                "name":"搜索",
-               "url":"https://www.baidu.com"
+               "url":"http://xing.easy.echosite.cn/main"
             },
             {
                "type":"view",
