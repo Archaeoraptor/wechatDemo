@@ -1,6 +1,5 @@
 import requests
 import json
-
 from settings import TOKEN, MENU, TEMPLATE_MSG, NULL, URL
 import xml.etree.ElementTree as ET
 import hashlib
@@ -58,8 +57,11 @@ def createMenu():
     p = json.dumps(MENU, ensure_ascii=False)
     print("--->" + AccessToken.get_access_token())
     postUrl = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token=%s' % AccessToken.get_access_token()
-    req = requests.post(postUrl, p.encode('utf-8'))
-    print(req.text)
+    rep = requests.post(postUrl, p.encode('utf-8'))
+    if json.loads(rep.text).get("errmsg") == "ok":
+        print("创建自定义菜单完成")
+    else:
+        print("创建自定义菜单失败")
 
 
 def sendTemplateMsg(toUser="oIPLH1P31seTfvqU2Gvr852DHS_Q"):
@@ -82,8 +84,11 @@ def sendTemplateMsg(toUser="oIPLH1P31seTfvqU2Gvr852DHS_Q"):
     print("--->" + AccessToken.get_access_token())
     # https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=ACCESS_TOKEN
     postUrl = 'https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=%s' % AccessToken.get_access_token()
-    req = requests.post(postUrl, p.encode('utf-8'))
-    print(req.text)
+    rep = requests.post(postUrl, p.encode('utf-8'))
+    if json.loads(rep.text).get("errmsg") == "ok":
+        print("发送消息模板完成")
+    else:
+        print("发送消息模板失败")
 
 
 def getUserList():
@@ -112,12 +117,30 @@ def sendAll():
    "text":{
       "content":"CONTENT"
    },
-    "msgtype":"text"
+    "msgtype":"text",
+
 }
 
     url = "https://api.weixin.qq.com/cgi-bin/message/mass/sendall?access_token=%s" %AccessToken.get_access_token()
     rep = requests.post(url,json.dumps(data))
     print(rep.text)
 
+
+def addReadingRecord():
+    dic = {"1":{"date":1,"times":2},"2":{"date":1,"times":2},3:{"date":1,"times":2}}
+    print(str(dic))
+    print(eval(str(dic)))
+
+
+def sendMsg():
+    xml = "<xml>" \
+          "<ToUserName><![CDATA[oIPLH1P31seTfvqU2Gvr852DHS_Q]]></ToUserName>" \
+          "<FromUserName><![CDATA[gh_9715d2592755]]></FromUserName>" \
+          "<CreateTime>12345678</CreateTime>" \
+          "<MsgType><![CDATA[text]]></MsgType>" \
+          "<Content><![CDATA[我是胖胡]]></Content>" \
+          "</xml>"
+    requests.post(xml)
+
 if __name__ == '__main__':
-    print(sendAll())
+    addReadingRecord()

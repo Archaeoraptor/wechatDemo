@@ -1,9 +1,9 @@
 from urllib import request as re
 import time
-
+# from app import db
 import requests
 from flask import json
-
+from werkzeug.security import generate_password_hash, check_password_hash
 from settings import APPID,APPSECRET
 
 
@@ -34,3 +34,51 @@ class AccessToken(object):
                 return cls.access_token.get('access_token')
         else:
             return cls.access_token.get('access_token')
+#
+#
+# class User(db.Model):
+#     __tablename__ = 'recommender_user_info'
+#     idc_num = db.Column(db.Integer,primary_key=True)
+#     username = db.Column(db.String(30),unique=True)
+#     password_hash = db.Column(db.String(255))
+#     def __repr__(self):
+#         return '<Role %r>' % self.username
+#
+#     def set_password(self,password):
+#         self.password_hash = generate_password_hash(password)
+#
+#     def check_password(self,password):
+#         return check_password_hash(self.password_hash,password)
+#
+#
+# class Medical_record(db.Model):
+#     __tablename__ = 'medical_record'
+#     idc_num = db.Column(db.Integer,primary_key=True)
+#
+#
+# class Article(db.model):
+#     __tablename__ = 'articles'
+#     id = db.Column(db.Integer,primary_key=True,autoincrement=True)
+#     article = db.Column(db.Text)
+#     author = db.Column(db.String(255))
+#     c_date = db.Column(db.String(255))
+#     comment_id = db.Column(db.String(255))
+#     comment_num = db.Column(db.String(255))
+#     content_url = db.Column(db.String(255))
+#     like_num = db.Column(db.String(255))
+#     nickname = db.Column(db.String(255))
+#     p_date = db.Column(db.String(255))
+#     read_num = db.Column(db.String(255))
+#     reward_num = db.Column(db.String(255))
+#     title = db.Column(db.String(255))
+#
+#
+# class UserReadingRecord(db.Model):
+#     __tablename__ = 'user_reading_record'
+#     idc_num = db.Column(db.Integer,primary_key=True)
+#     record = db.Column(db.Text)
+#     def update_record(self,idc_num,article_id,reading_record):
+#         result = UserReadingRecord.query.filter_by(idc_num=idc_num).first()
+#         record = dict(eval(result.record))
+#         if(article_id not in record.keys()):
+#             record[article_id] = reading_record

@@ -3,14 +3,19 @@ import threading
 
 import requests
 from flask import Flask, request, Response, render_template, jsonify, redirect, url_for
-from common.util import validate_wx_public,parseXML,createXML,createMenu,sendTemplateMsg,getUserList,getOpenid
+from flask_sqlalchemy import SQLAlchemy
+from common.util import validate_wx_public,parseXML,createXML,createMenu,sendTemplateMsg,getUserList,getOpenid,sendAll
 from validate.form import WxpublicForm
 from settings import APPID,APPSECRET
 from flask_cors import *
 
-
 app = Flask(__name__)
 CORS(app, supports_credentials=True)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:Asdfghjkl123@211.83.111.224:3306/xw_utf8mb4'
+app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+db = SQLAlchemy(app)
+
 #创建menu自定义菜单
 createMenu()
 #获取关注用户列表，向全部用户发送推送
@@ -24,6 +29,7 @@ createMenu()
 for user in getUserList():
     sendTemplateMsg(user)
 # sendRecommendMsg()
+sendAll()
 
 @app.route('/',methods=['GET','POST'])
 def validate():
@@ -105,6 +111,7 @@ def forget():
         return jsonify({
             "flag":1
         })
+
 
 if __name__ == '__main__':
     app.run()
