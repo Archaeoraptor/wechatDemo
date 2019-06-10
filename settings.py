@@ -3,6 +3,7 @@ TOKEN = "123"
 APPID = "wx65bbb0c05f89b3af"
 APPSECRET = "6152ef56c85bc4eb52f2d28c8ebea0f3"
 NULL = ""
+WECHATID = "gh_9715d2592755"
 URL = "http://xing.easy.echosite.cn"
 MENU =  {
      "button":[

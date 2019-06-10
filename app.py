@@ -2,11 +2,13 @@ import json
 import threading
 
 import requests
-from flask import Flask, request, Response, render_template, jsonify, redirect, url_for
+from flask import Flask, request, Response, render_template, jsonify
 from flask_sqlalchemy import SQLAlchemy
-from common.util import validate_wx_public,parseXML,createXML,createMenu,sendTemplateMsg,getUserList,getOpenid,sendAll
+from common.util import validate_wx_public,parseXML,createXML,createMenu,sendTemplateMsg,getUserList,sendAll,setUserTag,removeUserTag,getUserTags,createTag,getUserListByTagID,createMsg
+
+from werkzeug.security import generate_password_hash, check_password_hash
 from validate.form import WxpublicForm
-from settings import APPID,APPSECRET
+from settings import APPID,APPSECRET,WECHATID
 from flask_cors import *
 
 app = Flask(__name__)
@@ -26,10 +28,59 @@ createMenu()
 #     global timer
 #     timer = threading.Timer(3, sendRecommendMsg)
 #     timer.start()
-for user in getUserList():
-    sendTemplateMsg(user)
-# sendRecommendMsg()
-sendAll()
+# for user in getUserList():
+#     sendTemplateMsg(user)
+# # sendRecommendMsg()
+# sendAll()
+
+
+class User(db.Model):
+    __tablename__ = 'recommender_user_info'
+    idc_num = db.Column(db.Integer,primary_key=True)
+    username = db.Column(db.String(30),unique=True)
+    password_hash = db.Column(db.String(255))
+    def __repr__(self):
+        return '<Role %r>' % self.username
+
+    def set_password(self,password):
+        self.password_hash = generate_password_hash(password)
+
+    def check_password(self,password):
+        return check_password_hash(self.password_hash,password)
+
+
+class Medical_record(db.Model):
+    __tablename__ = 'medical_record'
+    idc_num = db.Column(db.Integer,primary_key=True)
+
+
+class Article(db.Model):
+    __tablename__ = 'articles'
+    id = db.Column(db.Integer,primary_key=True,autoincrement=True)
+    article = db.Column(db.Text)
+    author = db.Column(db.String(255))
+    c_date = db.Column(db.String(255))
+    comment_id = db.Column(db.String(255))
+    comment_num = db.Column(db.String(255))
+    content_url = db.Column(db.String(255))
+    like_num = db.Column(db.String(255))
+    nickname = db.Column(db.String(255))
+    p_date = db.Column(db.String(255))
+    read_num = db.Column(db.String(255))
+    reward_num = db.Column(db.String(255))
+    title = db.Column(db.String(255))
+
+
+class UserReadingRecord(db.Model):
+    __tablename__ = 'user_reading_record'
+    idc_num = db.Column(db.Integer,primary_key=True)
+    record = db.Column(db.Text)
+    def update_record(self,idc_num,article_id,reading_record):
+        result = UserReadingRecord.query.filter_by(idc_num=idc_num).first()
+        record = dict(eval(result.record))
+        if(article_id not in record.keys()):
+            record[article_id] = reading_record
+
 
 @app.route('/',methods=['GET','POST'])
 def validate():
@@ -44,15 +95,47 @@ def validate():
             ValueError
     else:
         str = request.get_data()
-        parseXML(str)
-        xml = "<xml>" \
-              "<ToUserName><![CDATA[oIPLH1P31seTfvqU2Gvr852DHS_Q]]></ToUserName>" \
-              "<FromUserName><![CDATA[gh_9715d2592755]]></FromUserName>" \
-              "<CreateTime>12345678</CreateTime>" \
-              "<MsgType><![CDATA[text]]></MsgType>" \
-              "<Content><![CDATA[我是胖胡]]></Content>" \
-              "</xml>"
-        return Response(xml, mimetype='text/xml')
+        result = parseXML(str)
+        userID = result[0]
+        if len(result) == 2 and result[1] == "订阅":
+            l = getUserTags()
+            flag = False
+            for dic in l:
+                if (dic["name"] == "订阅"):
+                    tagID = dic["id"]
+                    flag = True
+                    break
+            if flag:
+                if userID in getUserListByTagID(tagID):
+                    xml = createMsg(WECHATID, userID, "已订阅，无须重复订阅！")
+                    return Response(xml, mimetype='text/xml')
+                else:
+                    setUserTag([userID],tagID)
+                    xml = createMsg(WECHATID,userID,"订阅成功！")
+                    return Response(xml, mimetype='text/xml')
+            else:
+                tagID = createTag("订阅")
+                setUserTag([userID], tagID)
+                xml = createMsg(WECHATID,userID,"订阅成功！")
+                return Response(xml, mimetype='text/xml')
+        elif len(result) == 2 and result[1] == "取消订阅":
+            l = getUserTags()
+            flag = False
+            tagID = -1
+            for dic in l:
+                if (dic["name"] == "订阅"):
+                    tagID = dic["id"]
+                    flag = True
+                    break
+            if flag:
+                if userID in getUserListByTagID(tagID):
+                    removeUserTag([userID],tagID)
+                    xml = createMsg(WECHATID,userID,"取消订阅成功！")
+                    return Response(xml, mimetype='text/xml')
+        else:
+            # xml = createMsg(WECHATID,userID,"回复\"订阅\"开启消息推送，回复\"取消订阅\"关闭消息推送")
+            xml = createMsg(WECHATID,userID,"点击查看最新推荐内容\nhttp://www.baidu.com")
+            return Response(xml, mimetype='text/xml')
 
 
 @app.route('/list/',methods=["GET","POST"])
