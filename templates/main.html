@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="user-scalable=no,width=device-width,initial-scale=1,maximum-scale=1">
     <title>用户登录</title>
-    <link rel="stylesheet" type="text/css" href="/static/css/common.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/login.css">
-    <script src="/static/js/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../static/css/common.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/login.css">
+    <script src="../static/js/jquery.min.js"></script>
 </head>
 <body>
 <div class="login_cont">
@@ -20,16 +20,17 @@
         <div class="input_signup active">
             <input class="input" id="user_name" type="text" aria-label="用户名（包含字母／数字／下划线" placeholder="用户名">
             <div class="hint">请填写符合格式的用户名</div>
-            <input class="input" id="user_email" type="text" aria-label="邮箱" placeholder="邮箱">
-            <div class="hint">请填写邮箱</div>
+            <input class="input" id="user_email" type="text" aria-label="邮箱" placeholder="邮箱" style="display: none;">
+            <div class="hint" style="display: none;">请填写邮箱</div>
             <input class="input" id="phone" type="text" class="account" aria-label="手机号（仅支持中国大陆）"
-                   placeholder="手机号（仅支持中国大陆）">
-            <div class="hint">请填写手机号</div>
+                   placeholder="手机号（仅支持中国大陆）" style="display: none;">
+            <div class="hint" style="display: none;">请填写手机号</div>
             <input class="input" id="password" type="password" aria-label="密码" placeholder="密码（不少于 6 位）">
             <div class="hint">请填写符合格式的密码</div>
             <input class="input" id="repassword" type="password" aria-label="密码" placeholder="再次输入密码">
             <div class="hint">请再次输入密码</div>
             <input type="button" id="submit" class="button" name="button" value="注册">
+            
         </div>
     </form>
     <form>
@@ -45,62 +46,7 @@
         </div>
     </form>
 </div>
-<script type="text/javascript" src="/static/js/login.js"></script>
-<script type="text/javascript" src="/static/js/form.js"></script>
-<script>
-    var apphost = "http://xing.easy.echosite.cn";
-    var rurl = apphost + "/register";
-    var lurl = apphost + "/login";
-    document.getElementById("submit").onclick = function () {
-        $.ajax({
-            url: rurl,
-            type: 'POST',
-            dataType: "JSON",
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({
-                "username": $("#user_name").val(),
-                "useremail": $("#user_email").val(),
-                "phone": $("#phone").val(),
-                "password": $("#password").val()
-            }),
-            success: function (data) {
-                console.log(data);
-                if (data.flag == 1) {
-                    alert("注册成功!")
-                } else {
-                    alert(data.errorText);
-                }
-            },
-            error: function (data) {
-                alert(data);
-            }
-        })
-    }
-    document.getElementById("button").onclick = function () {
-        $.ajax({
-            url: lurl,
-            type: 'POST',
-            dataType: "JSON",
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({
-                "username": $("#login_user_name").val(),
-                "password": $("#login_password").val()
-            }),
-            success: function (data) {
-                console.log(data);
-                if (data.flag == 1) {
-                    window.localStorage.setItem("username",$("#login_user_name"));
-                    window.localStorage.setItem("password",$("#login_password"));
-                    window.location.href = apphost + "/index";
-                } else {
-                    alert(data.errorText);
-                }
-            },
-            error: function (data) {
-                alert(data);
-            }
-        })
-    }
-</script>
+<script type="text/javascript" src="../static/js/login.js"></script>
+<script type="text/javascript" src="../static/js/form.js"></script>
 </body>
 </html>
