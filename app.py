@@ -1,12 +1,9 @@
 import json
 import threading
 
-import requests
 from flask import Flask, request, Response, render_template, jsonify
-from flask_sqlalchemy import SQLAlchemy
 from common.util import validate_wx_public,parseXML,createXML,createMenu,sendTemplateMsg,getUserList,sendAll,setUserTag,removeUserTag,getUserTags,createTag,getUserListByTagID,createMsg
-
-from werkzeug.security import generate_password_hash, check_password_hash
+from models.models import *
 from validate.form import WxpublicForm
 from settings import APPID,APPSECRET,WECHATID
 from flask_cors import *
@@ -32,54 +29,6 @@ createMenu()
 #     sendTemplateMsg(user)
 # # sendRecommendMsg()
 # sendAll()
-
-
-class User(db.Model):
-    __tablename__ = 'recommender_user_info'
-    idc_num = db.Column(db.Integer,primary_key=True)
-    username = db.Column(db.String(30),unique=True)
-    password_hash = db.Column(db.String(255))
-    def __repr__(self):
-        return '<Role %r>' % self.username
-
-    def set_password(self,password):
-        self.password_hash = generate_password_hash(password)
-
-    def check_password(self,password):
-        return check_password_hash(self.password_hash,password)
-
-
-class Medical_record(db.Model):
-    __tablename__ = 'medical_record'
-    idc_num = db.Column(db.Integer,primary_key=True)
-
-
-class Article(db.Model):
-    __tablename__ = 'articles'
-    id = db.Column(db.Integer,primary_key=True,autoincrement=True)
-    article = db.Column(db.Text)
-    author = db.Column(db.String(255))
-    c_date = db.Column(db.String(255))
-    comment_id = db.Column(db.String(255))
-    comment_num = db.Column(db.String(255))
-    content_url = db.Column(db.String(255))
-    like_num = db.Column(db.String(255))
-    nickname = db.Column(db.String(255))
-    p_date = db.Column(db.String(255))
-    read_num = db.Column(db.String(255))
-    reward_num = db.Column(db.String(255))
-    title = db.Column(db.String(255))
-
-
-class UserReadingRecord(db.Model):
-    __tablename__ = 'user_reading_record'
-    idc_num = db.Column(db.Integer,primary_key=True)
-    record = db.Column(db.Text)
-    def update_record(self,idc_num,article_id,reading_record):
-        result = UserReadingRecord.query.filter_by(idc_num=idc_num).first()
-        record = dict(eval(result.record))
-        if(article_id not in record.keys()):
-            record[article_id] = reading_record
 
 
 @app.route('/',methods=['GET','POST'])
@@ -167,11 +116,27 @@ def main_page():
 @app.route('/register',methods=["GET","POST"])
 def register():
     username = request.json.get("username")
-    useremail = request.json.get("useremail")
-    phone = request.json.get("phone")
     password = request.json.get("password")
+    idc_num = request.json.get("idc_num")
+    # name =
+    result = User.query.filter_by(username=username).first()
+    if username is None or password is None:
+        return jsonify({
+            'flag': 0,
+            'errorText':'注册信息不合要求'
+        })
+    if result is not None:
+        return jsonify({
+            'flag': 2,
+            'errorText':'用户名已存在'
+        })
+    user = User(username=username)
+    user.set_password(password)
+    db.session.add(user)
+    db.idc_num = idc_num
+    db.session.commit()
     return jsonify({
-        "flag":1
+        'flag':1
     })
 
 
@@ -179,11 +144,21 @@ def register():
 def login():
     username = request.json.get("username")
     password = request.json.get("password")
-    print(username)
-    print(password)
-    return jsonify({
-        "flag":1
-    })
+    result = User.query.filter_by(username=username).first()
+    if result is None:
+        return jsonify({
+            "flag":2,
+            "errorText":"用户名不存在"
+        })
+    if result is None or not result.check_password(password):
+        return jsonify({
+            'flag':0,
+            'errorText':'用户名或密码错误'
+        })
+    if result.check_password(password):
+        return jsonify({
+            'flag': 1
+        })
 
 
 @app.route('/forget',methods=["GET","POST"])
