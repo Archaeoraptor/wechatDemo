@@ -1,19 +1,21 @@
 import json
 import threading
 
-from flask import Flask, request, Response, render_template, jsonify
+import requests
+from flask import request, Response, render_template, jsonify
+
 from common.util import validate_wx_public,parseXML,createXML,createMenu,sendTemplateMsg,getUserList,sendAll,setUserTag,removeUserTag,getUserTags,createTag,getUserListByTagID,createMsg
-from models.models import *
 from validate.form import WxpublicForm
 from settings import APPID,APPSECRET,WECHATID
 from flask_cors import *
+from models.User import User
+from models.Articles import Article
+from models.MedicalRecord import MedicalRecord
+from models.WechatToken import AccessToken
+from models.ReadingRecord import UserReadingRecord
+from config import app
 
-app = Flask(__name__)
-CORS(app, supports_credentials=True)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:Asdfghjkl123@211.83.111.224:3306/xw_utf8mb4'
-app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
-db = SQLAlchemy(app)
+
 
 #创建menu自定义菜单
 createMenu()
@@ -172,4 +174,4 @@ def forget():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(port=5003)

@@ -3,7 +3,7 @@ import json
 from settings import TOKEN, MENU, TEMPLATE_MSG, NULL, URL
 import xml.etree.ElementTree as ET
 import hashlib
-from models.models import AccessToken
+from models.WechatToken import AccessToken
 
 
 def validate_wx_public(form, token=TOKEN):
