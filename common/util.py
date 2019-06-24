@@ -1,3 +1,4 @@
+#通用工具，暂未分类管理
 import requests
 import json
 from settings import TOKEN, MENU, TEMPLATE_MSG, NULL, URL

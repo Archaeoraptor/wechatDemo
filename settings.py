@@ -1,3 +1,4 @@
+#项目相关常量，微信公众号参数配置等
 RUN = "echosite -config=config.yml start-all"
 TOKEN = "123"
 APPID = "wx65bbb0c05f89b3af"
