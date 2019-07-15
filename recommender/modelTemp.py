@@ -46,6 +46,9 @@ def predict(rating, similarity, type = 'user'):
 
 item_prediction = predict(train_data_matrix, item_similarity, type = 'item')
 user_prediction = predict(train_data_matrix, user_similarity, type = 'user')
+print(len(item_prediction))
+print(len(item_prediction[0]))
+print(np.argsort(item_prediction[0]))
 
 
 def rmse(prediction, ground_truth):
