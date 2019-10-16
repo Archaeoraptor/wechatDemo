@@ -1,4 +1,4 @@
-#项目配置文件
+#项目配置文件，包含数据库地址等
 from flask import Flask
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy

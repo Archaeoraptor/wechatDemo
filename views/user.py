@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify, render_template
+from flask import Blueprint, request, jsonify, render_template, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from models.User import User
 db = SQLAlchemy()
@@ -70,4 +70,10 @@ def main_page():
 
 @user.route('/index',methods=["GET","POST"])
 def index():
-    return render_template("index.html")
+    msg = "asd"
+    return render_template("index.html",msg=msg)
+
+
+@user.route('/profile',methods=["GET"])
+def profile():
+    return redirect(url_for('forget'))
