@@ -10,7 +10,7 @@ from scipy.sparse.linalg import svds
 
 header = ['user_id', 'item_id', 'rating', 'timestamp']
 
-df = pd.read_csv('../data/u.data', sep = '\t', names = header)
+df = pd.read_csv('../data/ratings.csv', sep = ',', names = header)
 n_users = df.user_id.unique().shape[0]#用户数量
 n_items = df.item_id.unique().shape[0]#物品数量
 print('Number of users = ' + str(n_users) + ' | Number of movies = ' + str(n_items))
@@ -22,6 +22,7 @@ test_data_matrix = np.zeros((n_users, n_items))
 #使用 pandas 遍历行数据
 for line in train_data.itertuples():
     #训练集评分矩阵
+    # print(line)
     train_data_matrix[line[1]-1, line[2]-1] = line[3]
 for line in test_data.itertuples():
     #测试集评分矩阵

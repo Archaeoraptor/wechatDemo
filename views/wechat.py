@@ -68,11 +68,13 @@ def validate():
 
 @wechat.route('/list/',methods=["GET","POST"])
 def getList():
+    # 用于服务号的重定向 已经弃用
     return render_template("redirect.html")
 
 
 @wechat.route('/list2/',methods=["GET","POST"])
 def getList2():
+    # 已经放弃使用，订阅号不能获取openid
     code = request.url.split("?code=")[1].split("&state")[0]
     url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid=%s&secret=%s&code=%s&grant_type=authorization_code'%(APPID,APPSECRET,code)
     rep = requests.get(url)

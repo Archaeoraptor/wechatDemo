@@ -1,6 +1,3 @@
-var apphost = "http://xing.easy.echosite.cn";
-var rurl = apphost + "/register";
-var lurl = apphost + "/login";
 document.getElementById("submit").onclick = function () {
     $.ajax({
         url: rurl,

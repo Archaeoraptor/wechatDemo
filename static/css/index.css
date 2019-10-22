@@ -65,14 +65,14 @@ body {
     float: right;
     margin-right: 10px;
 }
-#UpLayer span{
+.UpLayer span{
     border:#fff 1px solid;
     width:80px;
     padding:0 5px;
     line-height:20px;
     display:block;
 }
-#UpLayer{
+.UpLayer{
     z-index: 999;
     position: relative;
     /*top: -27px;*/
@@ -81,7 +81,7 @@ body {
     right: 30px;
     top: 4px;
 }
-#UpLayer ul{
+.UpLayer ul{
     display:none;
     position:absolute;
     border:#ccc 1px solid;
@@ -91,7 +91,7 @@ body {
     background:#f1f1f1;
     margin:-1px 0 0 0;
 }
-#UpLayer ul li{
+.UpLayer ul li{
     list-style: none;
     border-bottom:#ccc 1px dashed;
 }

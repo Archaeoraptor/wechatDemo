@@ -21,7 +21,10 @@ class myTimer(threading.Thread):
                 if now.hour == self.hour and now.minute == self.minute:
                     self.startTask()
                     break
-            time.sleep()
+                else:
+                    print("未到达")
+                    time.sleep(1000)
+
 
     def startTask(self):
         for tableName in self.tableNames:

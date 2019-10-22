@@ -62,8 +62,10 @@ def createMenu():
     postUrl = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token=%s' % AccessToken.get_access_token()
     rep = requests.post(postUrl, p.encode('utf-8'))
     if json.loads(rep.text).get("errmsg") == "ok":
+        print(1)
         return True
     else:
+        print(0)
         return False
 
 
