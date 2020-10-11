@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>知识推荐</title>
+    <title>肿瘤知识推荐</title>
     <meta name="viewport"
           content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <script src="/static/js/jquery.min.js"></script>
@@ -19,14 +19,10 @@
     <div class="swiper-container swiper1">
         <div class="swiper-wrapper">
             <div class="swiper-slide selected">最新文章</div>
-            <div class="swiper-slide">个性化推荐</div>
-            <div class="swiper-slide">菜单 3</div>
-            <div class="swiper-slide">菜单 4</div>
-            <div class="swiper-slide">菜单 5</div>
-            <div class="swiper-slide">菜单 6</div>
-            <div class="swiper-slide">菜单 7</div>
-            <div class="swiper-slide">菜单 8</div>
-            <div class="swiper-slide">菜单 9</div>
+            <div class="swiper-slide">为您推荐</div>
+            <div class="swiper-slide">更多发现</div>
+            <div class="swiper-slide">资讯导航</div>
+            <div class="swiper-slide">关于我们</div>
             <!--<div class="swiper-slide">菜单 10</div>-->
         </div>
     </div>
@@ -38,13 +34,13 @@
                     <div class="content">
                         {% for article in data["latest"] %}
                             <div class="item">
-                                <div class="article"><span><a href={{ article.url }}>{{ article.title }}</a></span>
+                                <div class="article"><span><a href={{ article.url }} class = "myurl">{{ article.title }}</a></span>
                                 </div>
                                 <div>
                                     <span class="from">{{ article.from }}</span>
                                     <div class="UpLayer">
                                         <div class="article_id" style="display: none;">{{ article.article_id }}</div>
-                                        <span><a href="javascript:void(0)" class="limitRecommend">减少推荐</a></span>
+                                        <span><a href="javascript:void(0)" class="limitRecommend">不感兴趣</a></span>
                                         <ul>
                                             <li><a href="">原因：1</a></li>
                                             <li><a href="">原因：2</a></li>
@@ -63,7 +59,7 @@
                     <div class="content">
                         {% for article in data["recommend"] %}
                             <div class="item">
-                                <div class="article"><span><a href={{ article.url }}>{{ article.title }}</a></span>
+                                <div class="article"><span><a href={{ article.url }} class = "myurl">{{ article.title }}</a></span>
                                 </div>
                                 <div>
                                     <span class="from">{{ article.from }}</span>
@@ -84,13 +80,14 @@
                 </div>
 
             </div>
-            <div class="swiper-slide swiper-no-swiping">内容 213213123</div>
+            <div class="swiper-slide swiper-no-swiping">良医汇肿瘤咨询</div>
             <div class="swiper-slide swiper-no-swiping">内容 ressssssss</div>
             <div class="swiper-slide swiper-no-swiping">内容 ffffffffffff</div>
-            <div class="swiper-slide swiper-no-swiping">内容 bbbbbbbbbbbbbbbbbvb</div>
-            <div class="swiper-slide swiper-no-swiping">内容 bvcccccccccccbvb</div>
-            <div class="swiper-slide swiper-no-swiping">内容 sdasdssssss</div>
-            <div class="swiper-slide swiper-no-swiping">内容 oiouiouioiuoiuo</div>
+
+{#            <div class="swiper-slide swiper-no-swiping">内容 bbbbbbbbbbbbbbbbbvb</div>#}
+{#            <div class="swiper-slide swiper-no-swiping">内容 bvcccccccccccbvb</div>#}
+{#            <div class="swiper-slide swiper-no-swiping">内容 sdasdssssss</div>#}
+{#            <div class="swiper-slide swiper-no-swiping">内容 oiouiouioiuoiuo</div>#}
             <!--<div class="swiper-slide swiper-no-swiping">内容 m,jnkjhkhgjghjugh</div>-->
         </div>
     </div>
@@ -150,9 +147,10 @@
                         } else {
                             //为了保证记录提交成功，最好是失败之后缓存，稍后和其他操作一起提交
                         }
+                        alert("已经为您减少此类推荐");
                     },
                     error: function (data) {
-                        alert(data);
+                        alert("已经为您减少此类推荐");
                     }
                 })
             } else {

@@ -86,16 +86,22 @@ def index():
                 "article_id": 1
             },
             {
-                "url": "http://mp.weixin.qq.com/s?__biz=MzA4NzE5OTYzNg==&mid=2650952886&idx=1&sn=1aa62fb7343b7ffe9957b8f10293804a&chksm=8bcbee4dbcbc675b764877be8fa9ea75167787eb9b12f2a767db335d549fa160393a22d69ebf&scene=27#wechat_redirect",
-                "title": "【新闻聚焦】BTV新闻：积极推广防癌健康查体",
-                "from": "来源：中国医学科学院肿瘤医院",
+                "url": "http://www.szch-cn.com/wygk/yyxw/mtbd/202006/t20200602_19246624.htm",
+                "title": "【今日头条】“云上抗癌”，肿瘤防治“国家队”送上深度抗癌科普，连续7天！",
+                "from": "来源：中国医学科学院肿瘤医院深圳医院",
                 "article_id": 2
-            }
+            },
+            {
+                "url": "https://www.liangyihui.net/doc/66126",
+                "title": "2020中国肿瘤免疫治疗会议（附最新版日程和演讲嘉宾简介）",
+                "from": "来源：CCFDIE平台",
+                "article_id": 1
+            },
         ],
         "recommend": [{
-            "url": "http://mp.weixin.qq.com/s?__biz=MzA4NzE5OTYzNg==&mid=2650952886&idx=1&sn=1aa62fb7343b7ffe9957b8f10293804a&chksm=8bcbee4dbcbc675b764877be8fa9ea75167787eb9b12f2a767db335d549fa160393a22d69ebf&scene=27#wechat_redirect",
-            "title": "【新闻聚焦】BTV新闻：积极推广防癌健康查体",
-            "from": "中国医学科学院肿瘤医院",
+            "url": "https://www.liangyihui.net/doc/46978",
+            "title": "张智泓教授：肺癌PD-L1判读和检测的三四事",
+            "from": "良医汇肿瘤咨询",
             "article_id": 1
         }]
     }
