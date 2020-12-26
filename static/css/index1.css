@@ -4,9 +4,8 @@ body {
     margin: 0 auto;
     color: #333;
     padding: 0;
-    font-family: "sans-serif";
+    font-family: "Microsoft Yahei";
     text-align: center;
-    background-color: #eeeeee;
 }
 .container {
     /*width: 100%;*/
@@ -16,14 +15,13 @@ body {
     width: 100%;
 }
 .swiper1 .selected {
-    color: #0d7377;
-    border-bottom: 2px solid #0d7377;
+    color: #ec5566;
+    border-bottom: 2px solid #ec5566;
 }
 .swiper1 .swiper-slide {
     text-align: center;
-    font-size: 20px;
-    height: 80px;
-    width: 100px;
+    font-size: 16px;
+    height: 50px;
     /* Center slide text vertically */
     display: -webkit-box;
     display: -ms-flexbox;
@@ -44,12 +42,11 @@ body {
 }
 .swiper2 .swiper-slide {
     height: calc(100vh - 50px);
-    background-color: #eeeeee;
-    color: #4facfe;
+    background-color: white;
+    color: #fff;
     text-align: center;
     box-sizing: border-box !important;
     overflow-x: hidden !important;
-    font-size: medium;
 }
 .content{
     margin: 0;
@@ -65,9 +62,8 @@ body {
 
 }
 .close_btn{
-    width: 300px;
-    height: 45px;
-    text-align: center;
+    float: right;
+    margin-right: 10px;
 }
 .UpLayer span{
     border:#fff 1px solid;
@@ -105,41 +101,9 @@ body {
     margin: 0;
 }
 .feedback{
-    background-color: #FAF0E6;
+    background-color: #cccccc;
     position: relative;
     height: 30px;
     float: right;
     width: 40px;
 }
-
-/* 不感兴趣样式*/
-.limitRecommend{
-    color:#777777;
-}
-
-.myurl{
-    color: #EA5A70;
-    font-size: large;
-    margin-top: 100px;
-}
-
-.navigation1{
-    color: #EA5A70;
-    font-size: x-large;
-}
-
-.navigation2{
-    color: #EA5A70;
-    font-size: x-large;
-}
-
-.article{
-    font-size: x-large;
-    margin-bottom: 20px;
-    /*margin-bottom: 200px;*/
-}
-
-/*.swiper-wrapper{*/
-/*    margin-bottom: 10px;*/
-/*}*/
-
