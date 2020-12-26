@@ -47,7 +47,7 @@ def validate():
                 xml = createMsg(WECHATID,userID,"订阅成功！")
                 return Response(xml, mimetype='text/xml')
         elif len(result) == 2 and result[1] == "取消订阅":
-            l = getUserTags()
+            '''l = getUserTags()
             flag = False
             tagID = -1
             for dic in l:
@@ -57,12 +57,12 @@ def validate():
                     break
             if flag:
                 if userID in getUserListByTagID(tagID):
-                    removeUserTag([userID],tagID)
-                    xml = createMsg(WECHATID,userID,"取消订阅成功！")
-                    return Response(xml, mimetype='text/xml')
+                    removeUserTag([userID],tagID)'''
+            xml = createMsg(WECHATID,userID,"取消订阅成功！")
+            return Response(xml, mimetype='text/xml')
         else:
             # xml = createMsg(WECHATID,userID,"回复\"订阅\"开启消息推送，回复\"取消订阅\"关闭消息推送")
-            xml = createMsg(WECHATID,userID,"点击查看最新推荐内容\nhttp://xing.easy.echosite.cn/main")
+            xml = createMsg(WECHATID,userID,"点击查看最新推荐内容\nhttps://uestc102.cn.utools.club/main")
             return Response(xml, mimetype='text/xml')
 
 

@@ -1,4 +1,4 @@
-#通用工具，暂未分类管理
+# 通用工具，暂未分类管理
 import requests
 import json
 from settings import TOKEN, MENU, TEMPLATE_MSG, NULL, URL
@@ -28,6 +28,7 @@ def parseXML(str):
         if el.tag == "Content":
             result.append(el.text)
     return result
+
 
 def createXML():
     """
@@ -62,10 +63,10 @@ def createMenu():
     postUrl = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token=%s' % AccessToken.get_access_token()
     rep = requests.post(postUrl, p.encode('utf-8'))
     if json.loads(rep.text).get("errmsg") == "ok":
-        print(1)
+        print("创建微信自定义菜单成功")
         return True
     else:
-        print(0)
+        print("创建微信自定义菜单失败")
         return False
 
 
@@ -76,12 +77,12 @@ def sendTemplateMsg(toUser="oIPLH1P31seTfvqU2Gvr852DHS_Q"):
         "url": URL + "/main",
         "data": {
             "first": {
-                "value":"推荐文章:",
-                "color":"#173177"
+                "value": "推荐文章:",
+                "color": "#173177"
             },
             "title": {
-                "value":"【新闻聚焦】BTV新闻：积极推广防癌健康查体",
-                "color":"#173177"
+                "value": "【新闻聚焦】BTV新闻：积极推广防癌健康查体",
+                "color": "#173177"
             }
         }
     }
@@ -108,53 +109,57 @@ def uploadForeverMaterial():
 
 
 def getOpenid():
-    url = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=%s&openid=OPENID" %AccessToken.get_access_token()
+    url = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=%s&openid=OPENID" % AccessToken.get_access_token()
     rep = requests.get(url)
     return json.loads(rep.text).get("openid")
 
 
 def sendAll():
     data = {
-   "filter":{
-      "is_to_all":True,
-   },
-   "text":{
-      "content":"CONTENT1"
-   },
-    "msgtype":"text",
+        "filter": {
+            "is_to_all": True,
+        },
+        "text": {
+            "content": "CONTENT1"
+        },
+        "msgtype": "text",
 
-}
-    p = json.dumps(data,ensure_ascii=False)
-    url = "https://api.weixin.qq.com/cgi-bin/message/mass/sendall?access_token=%s" %AccessToken.get_access_token()
-    rep = requests.post(url,p.encode("utf-8"))
-    if(json.loads(rep.text).get("errcode")==0):
+    }
+    p = json.dumps(data, ensure_ascii=False)
+    url = "https://api.weixin.qq.com/cgi-bin/message/mass/sendall?access_token=%s" % AccessToken.get_access_token()
+    print(url)
+    requests.post(url, p.encode("utf-8"))
+    rep = requests.post(url, p.encode("utf-8"))
+    print(rep)
+    if json.loads(rep.text).get("errcode") == 0:
+        print("群发成功")
         return True
     else:
         return False
 
 
-def createMsg(_from,_to,_msg):
+def createMsg(_from, _to, _msg):
     xml = "<xml>" \
-          "<ToUserName><![CDATA["\
-          +_to+\
+          "<ToUserName><![CDATA[" \
+          + _to + \
           "]]></ToUserName>" \
-          "<FromUserName><![CDATA["+\
-          _from\
-          +"]]></FromUserName>" \
-          "<CreateTime>12345678</CreateTime>" \
-          "<MsgType><![CDATA[text]]></MsgType>" \
-          "<Content><![CDATA["+\
-          _msg\
-          +"]]></Content>" \
-          "</xml>"
+          "<FromUserName><![CDATA[" + \
+          _from \
+          + "]]></FromUserName>" \
+            "<CreateTime>12345678</CreateTime>" \
+            "<MsgType><![CDATA[text]]></MsgType>" \
+            "<Content><![CDATA[" + \
+          _msg \
+          + "]]></Content>" \
+            "</xml>"
     return xml
 
 
-def sendByTag(tagid,msg):
+def sendByTag(tagid, msg):
     data = {
         "filter": {
             "is_to_all": False,
-            "tag_id":tagid
+            "tag_id": tagid
         },
         "text": {
             "content": msg
@@ -162,9 +167,9 @@ def sendByTag(tagid,msg):
         "msgtype": "text",
 
     }
-    p = json.dumps(data,ensure_ascii=False)
+    p = json.dumps(data, ensure_ascii=False)
     url = "https://api.weixin.qq.com/cgi-bin/message/mass/sendall?access_token=%s" % AccessToken.get_access_token()
-    rep = requests.post(url,p.encode('utf-8'))
+    rep = requests.post(url, p.encode('utf-8'))
     print(rep.text)
 
 
@@ -176,22 +181,22 @@ def createTag(tag):
     {   "tag":{ "id":134,//标签id "name":"广东"   } }
     """
     data = {
-        "tag":{
-            "name":tag
+        "tag": {
+            "name": tag
         }
     }
     p = json.dumps(data, ensure_ascii=False)
-    url = "https://api.weixin.qq.com/cgi-bin/tags/create?access_token=%s" %AccessToken.get_access_token()
-    rep = requests.post(url,p.encode('utf-8'))
+    url = "https://api.weixin.qq.com/cgi-bin/tags/create?access_token=%s" % AccessToken.get_access_token()
+    rep = requests.post(url, p.encode('utf-8'))
     return json.loads(rep.text).get("tag")
 
 
 def removeTag(tagid):
-    data = {   "tag":{        "id" : tagid   } }
+    data = {"tag": {"id": tagid}}
     p = json.dumps(data, ensure_ascii=False)
-    url = "https://api.weixin.qq.com/cgi-bin/tags/delete?access_token=%s" %AccessToken.get_access_token()
-    rep = requests.post(url,p.encode('utf-8'))
-    return json.loads(rep.text).get("errcode")==0
+    url = "https://api.weixin.qq.com/cgi-bin/tags/delete?access_token=%s" % AccessToken.get_access_token()
+    rep = requests.post(url, p.encode('utf-8'))
+    return json.loads(rep.text).get("errcode") == 0
 
 
 def getUserTags():
@@ -204,13 +209,13 @@ def getUserTags():
     "count":0 //此标签下粉丝数
     }
     """
-    url = "https://api.weixin.qq.com/cgi-bin/tags/get?access_token=%s" %AccessToken.get_access_token()
+    url = "https://api.weixin.qq.com/cgi-bin/tags/get?access_token=%s" % AccessToken.get_access_token()
     rep = requests.get(url)
     tags = json.loads(rep.text).get("tags")
     return tags
 
 
-def setUserTag(list,tag):
+def setUserTag(list, tag):
     """
     批量为用户打标签
     post 数据示例
@@ -223,16 +228,16 @@ def setUserTag(list,tag):
     :return:boolean
     """
     data = {
-        "openid_list":list,
-        "tagid":tag
+        "openid_list": list,
+        "tagid": tag
     }
     p = json.dumps(data, ensure_ascii=False)
-    url = "https://api.weixin.qq.com/cgi-bin/tags/members/batchtagging?access_token=%s" %AccessToken.get_access_token()
-    rep = requests.post(url,p.encode('utf-8'))
-    return json.loads(rep.text).get("errcode")==0
+    url = "https://api.weixin.qq.com/cgi-bin/tags/members/batchtagging?access_token=%s" % AccessToken.get_access_token()
+    rep = requests.post(url, p.encode('utf-8'))
+    return json.loads(rep.text).get("errcode") == 0
 
 
-def removeUserTag(list,tagid):
+def removeUserTag(list, tagid):
     """
     批量为用户取消标签
     post 数据示例
@@ -245,25 +250,50 @@ def removeUserTag(list,tagid):
     :return:boolean
     """
     data = {
-        "openid_list":list,
-        "tagid":tagid
+        "openid_list": list,
+        "tagid": tagid
     }
     p = json.dumps(data, ensure_ascii=False)
-    url = "https://api.weixin.qq.com/cgi-bin/tags/members/batchuntagging?access_token=%s" %AccessToken.get_access_token()
-    rep = requests.post(url,p.encode('utf-8'))
-    return json.loads(rep.text).get("errcode")==0
+    url = "https://api.weixin.qq.com/cgi-bin/tags/members/batchuntagging?access_token=%s" % AccessToken.get_access_token()
+    rep = requests.post(url, p.encode('utf-8'))
+    return json.loads(rep.text).get("errcode") == 0
 
 
 def getUserListByTagID(tagid):
-    data = {   "tagid" : tagid,   "next_openid":"" }
-    url = "https://api.weixin.qq.com/cgi-bin/user/tag/get?access_token=%s" %AccessToken.get_access_token()
+    data = {"tagid": tagid, "next_openid": ""}
+    url = "https://api.weixin.qq.com/cgi-bin/user/tag/get?access_token=%s" % AccessToken.get_access_token()
     p = json.dumps(data, ensure_ascii=False)
     rep = requests.post(url, p.encode('utf-8'))
     l = json.loads(rep.text).get("data")
-    if l==None:
+    if l == None:
         return []
     else:
         return l["openid"]
+
+
+def isUsernameValid(username):
+    if username is None or len(username) < 4 or len(username) > 16:
+        return False
+    return True
+
+
+def isPasswordValid(password):
+    if password is None or len(password) < 6 or len(password) > 30:
+        return False
+    return True
+
+
+def isNameValid(name):
+    if name is None or len(name) < 1 or len(name) > 20:
+        return False
+    return True
+
+
+def isIDCumValid(idc_num):
+    if idc_num is None or len(idc_num) != 18:
+        print(1)
+        return False
+    return True
 
 
 if __name__ == '__main__':

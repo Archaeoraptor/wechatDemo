@@ -1,18 +1,18 @@
 #从数据库加载数据集
 import pymysql
 import csv
-def exportToCSV(tableName,file,index):
+def exportToCSV(tableName,fileName,index):
     """
     将数据表数据导出到本地csv文件，以便进行算法的训练
     :param tableName: 数据表名
-    :param file: 目标文件名
+    :param fileName: 目标文件名
     :param index: 开始位置
     :return:
     """
     file = "../data/" + file +".csv"
     f = open(file,"a",newline="",encoding="utf-8")
     writer = csv.writer(f)
-    db = pymysql.connect("139.224.54.233","root","Asdfghjkl123","xw_utf8mb4")
+    db = pymysql.connect("211.83.111.221:3308", "root", "123456", "xw_utf8mb4")
     cursor = db.cursor()
     begin = index
     len = 1000
