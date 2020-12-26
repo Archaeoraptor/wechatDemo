@@ -12,7 +12,7 @@ def exportToCSV(tableName,fileName,index):
     file = "../data/" + file +".csv"
     f = open(file,"a",newline="",encoding="utf-8")
     writer = csv.writer(f)
-    db = pymysql.connect("211.83.111.221:3308", "root", "123456", "xw_utf8mb4")
+    db = pymysql.connect("127.0.0.1:3308", "root", "123456", "xw_utf8mb4")
     cursor = db.cursor()
     begin = index
     len = 1000
