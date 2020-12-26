@@ -6,6 +6,7 @@ body {
     padding: 0;
     font-family: "Microsoft Yahei";
     text-align: center;
+    background-color: #eeeeee;
 }
 .container {
     /*width: 100%;*/
@@ -15,8 +16,8 @@ body {
     width: 100%;
 }
 .swiper1 .selected {
-    color: #ec5566;
-    border-bottom: 2px solid #ec5566;
+    color: #0d7377;
+    border-bottom: 2px solid #0d7377;
 }
 .swiper1 .swiper-slide {
     text-align: center;
@@ -42,8 +43,8 @@ body {
 }
 .swiper2 .swiper-slide {
     height: calc(100vh - 50px);
-    background-color: #ccc;
-    color: #fff;
+    background-color: #eeeeee;
+    color: #4facfe;
     text-align: center;
     box-sizing: border-box !important;
     overflow-x: hidden !important;
@@ -101,9 +102,18 @@ body {
     margin: 0;
 }
 .feedback{
-    background-color: #cccccc;
+    background-color: #FAF0E6;
     position: relative;
     height: 30px;
     float: right;
     width: 40px;
+}
+
+/* 不感兴趣样式*/
+.limitRecommend{
+    color:#777777;
+}
+
+.myurl{
+    color: violet;
 }
