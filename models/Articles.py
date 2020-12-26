@@ -5,17 +5,11 @@ db = SQLAlchemy()
 
 
 class Article(db.Model):
-    __tablename__ = 'articles'
+    __tablename__ = 'article'
     id = db.Column(db.Integer,primary_key=True,autoincrement=True)
-    article = db.Column(db.Text)
-    author = db.Column(db.VARCHAR())
-    c_date = db.Column(db.VARCHAR(255))
-    comment_id = db.Column(db.VARCHAR(255))
-    comment_num = db.Column(db.VARCHAR(255))
-    content_url = db.Column(db.VARCHAR(255))
-    like_num = db.Column(db.VARCHAR(255))
-    nickname = db.Column(db.VARCHAR(255))
-    p_date = db.Column(db.VARCHAR(255))
-    read_num = db.Column(db.VARCHAR(255))
-    reward_num = db.Column(db.VARCHAR(255))
-    title = db.Column(db.VARCHAR(255))
+    resource = db.Column(db.VARCHAR(20))
+    url = db.Column(db.VARCHAR(255))
+    title = db.Column(db.VARCHAR(20))
+    disease = db.Column(db.VARCHAR(10))
+    label = db.Column(db.VARCHAR(20))
+    content = db.Column(db.Text)
