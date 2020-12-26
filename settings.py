@@ -1,11 +1,13 @@
 #项目相关常量，微信公众号参数配置等
 RUN = "echosite -config=config.yml start-all"
-TOKEN = "123"
-APPID = "wx65bbb0c05f89b3af"
-APPSECRET = "6152ef56c85bc4eb52f2d28c8ebea0f3"
+TOKEN = "aiyayayi2019"
+APPID = "wxa67ed7b1a6dda76f"
+APPSECRET = "0d9f94c64b29ee4a164cf996b992d1f6"
 NULL = ""
-WECHATID = "gh_9715d2592755"
-URL = "http://xing.easy.echosite.cn"
+WECHATID = "gh_9add08581213"
+#URL = "https://uestc102.cn.utools.club"
+#URL = "http://3469396pz2.wicp.vip/"
+URL = "https://uestc102.cn.utools.club"
 MENU =  {
      "button":[
      {
@@ -19,18 +21,18 @@ MENU =  {
            {
                "type":"view",
                "name":"搜索",
-               "url":"http://xing.easy.echosite.cn/main"
+               "url":"https://uestc102.cn.utools.club"
             },
             {
                "type":"view",
                "name":"列表",
-               "url":"http://xing.easy.echosite.cn/list"
+               "url":"https://uestc102.cn.utools.club"
             },
             {
                  "type":"miniprogram",
                  "name":"万年历",
-                 "url":"http://mp.weixin.qq.com",
-                 "appid":"wx286b93c14bbf93aa",
+                 "url":"https://uestc102.cn.utools.club",
+                 "appid":"wxb0c4eef8b810664e",
                  "pagepath":"pages/lunar/index"
              },
             {
