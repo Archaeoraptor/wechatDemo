@@ -1,19 +1,18 @@
 document.getElementById("submit").onclick = function () {
-    $.ajax({
+        $.ajax({
         url: rurl,
         type: 'POST',
         dataType: "JSON",
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify({
             "username": $("#user_name").val(),
-            "useremail": $("#user_email").val(),
-            "phone": $("#phone").val(),
-            "password": $("#password").val()
+            "password": $("#password").val(),
         }),
         success: function (data) {
             console.log(data);
             if (data.flag == 1) {
-                alert("注册成功!")
+                alert("注册成功!");
+                $(".signin").click();
             } else {
                 alert(data.errorText);
             }
@@ -31,20 +30,27 @@ document.getElementById("button").onclick = function () {
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify({
             "username": $("#login_user_name").val(),
-            "password": $("#login_password").val()
+            "password": $("#login_password").val(),
         }),
         success: function (data) {
-            console.log(data);
             if (data.flag == 1) {
-                window.localStorage.setItem("username",$("#login_user_name"));
-                window.localStorage.setItem("password",$("#login_password"));
-                window.location.href = apphost + "/index";
+                if(data.cancer_type == null || data.cancer_type == ''){
+                    localStorage.setItem("username",$("#login_user_name").val());
+                    console.log("现在登陆"+$("#login_user_name").val());
+                    // window.localStorage.setItem("username",$("#login_user_name"));
+                    // window.localStorage.setItem("password",$("#login_password"));
+                    window.location.href = root + "/table";
+                }else{
+                    window.location.href = root + "/index/"+data.cancer_type;
+                }
             } else {
+                console.log(data);
                 alert(data.errorText);
+
             }
         },
         error: function (data) {
-            alert(data);
+            //alert(data);
         }
     })
 }
