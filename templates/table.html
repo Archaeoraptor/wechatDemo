@@ -5,7 +5,6 @@
     <meta name="viewport" content="user-scalable=no,width=device-width,initial-scale=1,maximum-scale=1">
     <title>用户登录</title>
     <link rel="stylesheet" type="text/css" href="../static/css/common.css">
-    <link rel="stylesheet" type="text/css" href="../static/css/login.css">
     <link rel="stylesheet" href="http://libs.baidu.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="../static/css/jq22-demo.css">
 	<link rel="stylesheet" type="text/css" href="../static/css/jquery-confirm.css" />
@@ -27,7 +26,7 @@
 
     {   margin:auto;
         padding:20px;
-        width:60%;
+        width:99%;
         box-shadow:0px 0px 10px #000;}
 
 
@@ -46,7 +45,7 @@
                     <option value="乳腺癌">乳腺癌</option>
                     <option value="肝癌">肝癌</option>
                     <option value="食管癌">食管癌</option>
-                    <option value="胃肠道肿瘤">胃肠道肿瘤</option>
+                    <option value="结直肠癌">结直肠癌</option>
                     <option value="胃癌">胃癌</option>
                     <option value="甲状腺癌">甲状腺癌</option>
                     <option value="宫颈癌">宫颈癌</option>
@@ -61,44 +60,89 @@
 
                 <div id="item3" >
                     <label>3.您的主要治疗方式：</label>
-                    <input type="checkbox" name="category" value="手术" />手术 
-                    <input type="checkbox" name="category" value="放疗" />放疗
-                    <input type="checkbox" name="category" value="化疗" />化疗  
-                    <input type="checkbox" name="category" value="靶向治疗" />靶向治疗
-                    <br><br>
-                    <input type="text" name="category" value="其他" />
+                    <ul>
+                        <li>手术<input class="select" type="checkbox" name="category" value="手术" /></li>
+                        <li>放疗<input class="select" type="checkbox" name="category" value="放疗" /></li>
+                        <li>化疗<input class="select" type="checkbox" name="category" value="化疗" /></li>
+                        <li>靶向治疗<input class="select" type="checkbox" name="category" value="靶向治疗" /></li>
+                        <input type="text" name="category_else" placeholder="其他" />
+                    </ul>                  
                 </div>
                 <br>
+
                 <div id="item4" >
                     <label>4.您确诊的机构是：</label>
-                    <input class="input" id="item2" type="text" >  
+                    <input class="input" id="item2_1" type="text">
                 </div>
                 <br>
+
                 <div id="item5" >
                     <label>5.治疗结束后您是否定期到医疗机构复诊：</label>
                     <br>
-                        <input type="radio" name="category" value="每月" />每月
-                        <input type="radio" name="category" value="每季度" />每季度
-                        <input type="radio" name="category" value="每半年" />每半年
-                    
-                    <input type="radio" name="category" value="不定期复诊" />不定期复诊
-                    <input type="radio" name="category" value="从未复诊" /> 从未复诊
+                    <ul>
+                        <li>每月<input class="select" type="radio" name="category_retreatment" value="每月" /></li>
+                        <li>每季度<input  class="select" type="radio" name="category_retreatment" value="每季度" /></li>
+                        <li>每半年<input  class="select" type="radio" name="category_retreatment" value="每半年" /></li>
+                        <li>不定期复诊<input class="select" type="radio" name="category_retreatment" value="不定期复诊" /></li>
+                        <li>从未复诊<input class="select" type="radio" name="category_retreatment" value="从未复诊" /> </li>
+                    </ul>
                 </div>
                 <br>
 
                 <div id="item6" >
                     <label>6.您获得癌症防治相关知识（包括预防、诊疗、康复等内容）的前三位途径包括：</label><br>
+                    <ul>
+                        <li>电视<input class="select" type="checkbox" name="category_channel" value="电视" /> </li>
+                        <li>报纸<input class="select" type="checkbox" name="category_channel" value="报纸" /></li>
+                        <li>微信<input class="select" type="checkbox" name="category_channel" value="微信" />  </li>
+                        <li>微博<input class="select" type="checkbox" name="category_channel" value="微博" /></li>
+                        <li>网站<input class="select" type="checkbox" name="category_channel" value="网站" /></li>
+                        <li>病友介绍<input class="select" type="checkbox" name="category_channel" value="病友介绍" /></li>
+                        <li>二级以上医疗机构复查或随访<input class="select" type="checkbox" name="category_channel" value="二级以上医疗机构复查或随访" /></li>
+                        <li>民间组织<input class="select" type="checkbox" name="category_channel" value="民间组织" /></li>
+                        <input type="text" name="category_channel_else" placeholder="其他" />
+                    </ul>
+                    
+                </div>
+                <br>
 
-                    <input type="checkbox" name="category" value="电视" />电视 
-                    <input type="checkbox" name="category" value="报纸" />报纸
-                    <input type="checkbox" name="category" value="微信" />微信  
-                    <input type="checkbox" name="category" value="微博" />微博
-                    <input type="checkbox" name="category" value="网站" />网站
-                    <input type="checkbox" name="category" value="病友介绍" />病友介绍
-                    <input type="checkbox" name="category" value="二级以上医疗机构复查或随访" />二级以上医疗机构复查或随访
-                    <input type="checkbox" name="category" value="民间组织" />民间组织
-                    <br><br>
-                    <input type="text" name="category" value="其他" />
+                <div id="item7" >
+                    <label>7.您对哪些内容的推荐知识感兴趣径包括？</label><br>
+                    <ul>
+                        <li>自身所患癌症的康复知识<input class="select" type="checkbox" name="category_interest" value="自身所患癌症的康复知识" /></li>
+                        <li>自身所患癌症的诊疗技术<input class="select" type="checkbox" name="category_interest" value="自身所患癌症的诊疗技术" /></li>
+                        <li>自身所患癌症的预防知识<input class="select" type="checkbox" name="category_interest" value="自身所患癌症的预防知识" /></li>
+                        <li>其他癌症的防治知识<input class="select" type="checkbox" name="category_interest" value="其他癌症的防治知识" /></li>
+                        <input type="text" name="category_interest_else" placeholder="其他" />
+                    </ul>
+
+                    
+                </div>
+                <br>
+
+                <div id="item8" >
+                    <label>8.您对哪些方式的知识推送感兴趣？</label><br>
+                    <ul>
+                        <li>图文类<input class="select" type="checkbox" name="category_method" value="图文类" /> </li>
+                        <li>视频类<input class="select" type="checkbox" name="category_method" value="视频类" /></li>
+                        <li>专家讲座<input class="select" type="checkbox" name="category_method" value="专家讲座" />  </li>
+                        <li>病友介绍<input class="select" type="checkbox" name="category_method" value="病友介绍" /></li>
+                        <input type="text" name="category_method_else" placeholder="其他" />
+                    </ul>
+                    
+                </div>
+                <br>
+
+                <div id="item9" >
+                    <label>9.您能够接受的微信知识推送的频率是？</label><br>
+                    <ul>
+                        <li>每天一次<input class="select" type="radio" name="category_frequency" value="每天一次" /></li>
+                        <li>每周一次<input class="select" type="radio" name="category_frequency" value="每周一次" /></li>
+                        <li>每月一次<input class="select" type="radio" name="category_frequency" value="每月一次" /></li>
+                        <li>更长时间一次<input class="select" type="radio" name="category_frequency" value="更长时间一次" /></li>
+                        <input type="text" name="category_frequency_else" placeholder="其他" />
+                    </ul>
+
                 </div>
                 <br>
 

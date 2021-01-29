@@ -149,3 +149,12 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+
+
+# ignore output files
+
+*.txt
+*.out
+
+config.py
+settings.py

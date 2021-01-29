@@ -128,13 +128,14 @@ def sendAll():
     p = json.dumps(data, ensure_ascii=False)
     url = "https://api.weixin.qq.com/cgi-bin/message/mass/sendall?access_token=%s" % AccessToken.get_access_token()
     print(url)
-    requests.post(url, p.encode("utf-8"))
+    #requests.post(url, p.encode("utf-8"))
     rep = requests.post(url, p.encode("utf-8"))
     print(rep)
     if json.loads(rep.text).get("errcode") == 0:
-        print("群发成功")
+        print("发送成功")
         return True
     else:
+        print("发送失败")
         return False
 
 
@@ -158,7 +159,7 @@ def createMsg(_from, _to, _msg):
 def sendByTag(tagid, msg):
     data = {
         "filter": {
-            "is_to_all": False,
+            "is_to_all": True,
             "tag_id": tagid
         },
         "text": {
@@ -212,6 +213,7 @@ def getUserTags():
     url = "https://api.weixin.qq.com/cgi-bin/tags/get?access_token=%s" % AccessToken.get_access_token()
     rep = requests.get(url)
     tags = json.loads(rep.text).get("tags")
+    print(tags)
     return tags
 
 

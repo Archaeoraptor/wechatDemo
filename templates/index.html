@@ -15,12 +15,14 @@
         var getval = thisURL.split('?')[1];
         console.log("type="+getval);
     </script>
+
     <link rel="stylesheet" href="/static/css/swiper-3.2.7.min.css"/>
     <link rel="stylesheet" href="/static/css/index.css">
     <link rel="stylesheet" href="/static/css/layer-animate.css">
 </head>
 <body>
 <div class="container">
+<input type="button" id="submit" class="close_btn" name="button" value="退出登录">
     <div class="swiper-container swiper1">
         <div class="swiper-wrapper">
             <div class="swiper-slide selected">最新文章</div>
@@ -39,7 +41,7 @@
                     <div class="content">
                         {% for article in data["latest"] %}
                             <div class="item">
-                                <div class="article"><span><a href={{ article.url }} class = "myurl"> {{ article.title }} </a></span>
+                                <div class="article"><span><a href={{ article.url }} class="myurl">{{ article.title }}</a></span>
                                 </div>
                                 <div>
                                     <span class="from">{{ article.from }}</span>
@@ -126,12 +128,34 @@
 
             </div>
 
+{#            <div class="swiper-slide swiper-no-swiping">内容 bbbbbbbbbbbbbbbbbvb</div>#}
+{#            <div class="swiper-slide swiper-no-swiping">内容 bvcccccccccccbvb</div>#}
+{#            <div class="swiper-slide swiper-no-swiping">内容 sdasdssssss</div>#}
+{#            <div class="swiper-slide swiper-no-swiping">内容 oiouiouioiuoiuo</div>#}
+            <!--<div class="swiper-slide swiper-no-swiping">内容 m,jnkjhkhgjghjugh</div>-->
         </div>
-    <input type="button" id="submit" class="close_btn" name="button" value="退出登录">
     </div>
 
 </div>
+<script src="/static/js/index.js"></script>
 <script>
+    window.onload = function(){
+        $(".myurl").on("click", function () {
+            localStorage.setItem("link",this.getAttribute("href"));
+            $.ajax({
+                url: add_reading_record,
+                type: "POST",
+                dataType: "JSON",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({
+                    "read_link": this.getAttribute("href")
+                }),
+                {#success: function (data) {},#}
+            });
+            //alert("你确定要看这篇文章吗");
+        });
+    };
+
     $(function () {
         function setCurrentSlide(ele, index) {
             $(".swiper1 .swiper-slide").removeClass("selected");
@@ -169,6 +193,7 @@
     });
     $(".limitRecommend").on("click", function () {
             if (confirm("是否减少此类文章的推荐?")) {
+
                 $.ajax({
                     url: callback,
                     type: 'POST',
@@ -198,36 +223,27 @@
         }
     );
 </script>
-    <script>
+
+<script>
     window.onbeforeunload=function(){
-　　var e = window.event || e;
-　　localStorage.setItem("lastOpen",Date.parse(new Date()));
-}
-    window.onload = function () {
+　　     var e = window.Event||e;
+　　     localStorage.setItem("lastOpen",Date.parse(new Date()));
+    }
+    {#window.onload = function () {
         var now = Date.parse(new Date());
         var lastOpen = localStorage.getItem("lastOpen")!=null?localStorage.getItem("lastOpen"):0;
         alert("浏览时长:"+(now-lastOpen)/1000+"秒");
-        $.ajax({
-                    url: callback,
-                    type: 'POST',
-                    dataType: "JSON",
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({
-                        "user_id": localStorage.getItem("user_id"),
-                        "article_id": this.parentElement.parentElement.getElementsByClassName("article_id")[0].innerHTML,
-                        "code": 2
-                    }),
-    },
+    }#}
     window.addEventListener("popstate", function(e) {
-        alert("我监听到了浏览器的返回按钮事件啦");//根据自己的需求实现自己的功能
         var now = Date.parse(new Date());
         var lastOpen = localStorage.getItem("lastOpen")!=null?localStorage.getItem("lastOpen"):0;
-        alert(" 当前浏览时长:"+(now-lastOpen)/1000+"秒");
-    }
-    );
-
-
+        time = (now-lastOpen)/1000
+        alert(localStorage.getItem("link")
+        "|"+time)
+    }, false);
 </script>
+
+
 </body>
 
 </html>

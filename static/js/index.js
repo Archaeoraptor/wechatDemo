@@ -13,7 +13,7 @@ document.getElementById("submit").onclick = function () {
             console.log(data);
             if (data.flag == 1) {
                 alert("退出登录成功!");
-                window.location.href = root + "/logout";
+                window.location.href = root + "/main";
             } else {
                 alert(data.errorText);
             }

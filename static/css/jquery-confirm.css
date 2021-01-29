@@ -66,6 +66,7 @@ body.jconfirm-noscroll {
           perspective-origin: center;
 }
 .jconfirm .jconfirm-box {
+  width:98%;
   background: white;
   border-radius: 4px;
   position: relative;

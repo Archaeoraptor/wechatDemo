@@ -16,9 +16,3 @@ def create_app():
 
 def sendMsgRegularly():
     pass
-
-
-def job1():
-    print('job1 running....')
-
-

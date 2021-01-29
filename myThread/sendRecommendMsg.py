@@ -10,4 +10,4 @@ class dataUpdate(threading.Thread):
 
     def run(self):
         print("send recommend message")
-        sendByTag(102, "点击查看最新的推荐内容\nhttps://uestc102.cn.utools.club/main")
+        sendByTag(102, "点击查看最新的推荐内容\nhttps://uestctest.cn1.utools.club/main")
