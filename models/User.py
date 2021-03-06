@@ -89,3 +89,29 @@ class SurveyResult(db.Model):
         self.Answer7 = a7
         self.Answer8 = a8
         self.Answer9 = a9
+
+
+class RecommendArticle(db.Model):
+    __tablename__ = 'recommend_article'
+    id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    article_title = db.Column(db.VARCHAR(255), unique=False, nullable=False)
+    article_link = db.Column(db.VARCHAR(255), unique=False, nullable=False)
+    article_content = db.Column(db.TEXT(255), unique=False, nullable=False)
+    article_tag = db.Column(db.VARCHAR(20), unique=False)
+
+    def __repr__(self):
+        return '<Role %r>' % self.username
+
+    def get_article_title(self):
+        return self.article_title
+
+    def get_article_link(self):
+        return self.article_link
+
+    def get_article_content(self):
+        return self.article_content
+
+    def get_article_tag(self):
+        return self.article_tag
+
+db.create_all()
