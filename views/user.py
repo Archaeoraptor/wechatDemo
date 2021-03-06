@@ -2,8 +2,8 @@ from flask import Blueprint, request, jsonify, render_template, redirect, url_fo
 from flask_sqlalchemy import SQLAlchemy
 
 from common.util import isUsernameValid, isPasswordValid, isIDCumValid, isNameValid
-from models.User import User,ReadLog,SurveyResult
-from config import db,app
+from models.User import User,ReadLog,SurveyResult,RecommendArticle
+from config import db,app,babel
 from static_data import *
 import random
 
@@ -13,12 +13,26 @@ from flask_login import LoginManager,login_user,login_required,current_user,logo
 from common.util import sendAll
 #db.create_all()
 
-user = Blueprint('user', __name__)
+import flask_admin
+from flask_admin.base import MenuLink
+from flask_admin.contrib import sqla
+from flask_admin.contrib.sqla import filters
+from flask_admin.contrib.sqla.filters import BaseSQLAFilter, FilterEqual
+from flask_admin.babel import gettext
+from models.User import User
+
+
+user = Blueprint('users', __name__)
 
 login_manager = LoginManager()
 login_manager.session_protection = 'strong'
 login_manager.login_view = 'login'
 login_manager.init_app(app=app)
+admin = flask_admin.Admin(app, name='推送文章后台管理系统', template_mode='bootstrap4')
+admin.add_view(sqla.ModelView(User, db.session))
+admin.add_view(sqla.ModelView(RecommendArticle, db.session))
+#admin = flask_admin.Admin(app, name='推送文章后台管理系统', template_mode='bootstrap4')
+#admin.add_view(sqla.ModelView(User, db.session))
 
 sendAll()
 
@@ -366,3 +380,6 @@ def addReadingRecord():
         'flag':1
     })
 
+@user.route('/admin',methods=["GET","POST"])
+def myAdmin():
+    return render_template("admin.html")
