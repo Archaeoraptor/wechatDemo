@@ -96,7 +96,7 @@ class RecommendArticle(db.Model):
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     article_title = db.Column(db.VARCHAR(255), unique=False, nullable=False)
     article_link = db.Column(db.VARCHAR(255), unique=False, nullable=False)
-    article_content = db.Column(db.TEXT(255), unique=False, nullable=False)
+    article_source = db.Column(db.VARCHAR(255), unique=False, nullable=True)
     article_tag = db.Column(db.VARCHAR(20), unique=False)
 
     def __repr__(self):
@@ -108,10 +108,13 @@ class RecommendArticle(db.Model):
     def get_article_link(self):
         return self.article_link
 
-    def get_article_content(self):
-        return self.article_content
+    def get_article_source(self):
+        return self.article_source
 
     def get_article_tag(self):
         return self.article_tag
+
+    def get_id(self):
+        return self.id
 
 db.create_all()

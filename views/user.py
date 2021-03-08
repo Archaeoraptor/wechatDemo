@@ -20,6 +20,7 @@ from flask_admin.contrib.sqla import filters
 from flask_admin.contrib.sqla.filters import BaseSQLAFilter, FilterEqual
 from flask_admin.babel import gettext
 from models.User import User
+from sqlalchemy import inspect
 
 
 user = Blueprint('users', __name__)
@@ -29,12 +30,26 @@ login_manager.session_protection = 'strong'
 login_manager.login_view = 'login'
 login_manager.init_app(app=app)
 admin = flask_admin.Admin(app, name='推送文章后台管理系统', template_mode='bootstrap4')
-admin.add_view(sqla.ModelView(User, db.session))
-admin.add_view(sqla.ModelView(RecommendArticle, db.session))
+
+class UserModelView(sqla.ModelView):
+    column_labels = dict(username='用户名', password_hash='密码Hash',mr_id='疾病类别', phone_num='电话号码')
+
+
+class ArticleModelView(sqla.ModelView):
+    column_labels = dict(article_tag='标签', article_title='文章标题',article_source='文章来源', article_link='文章链接')
+
+class RecordModelView(sqla.ModelView):
+    column_labels = dict(read_link='文章链接', time='阅读时长（秒）',username='姓名', phone_num='电话号码')
+    column_hide_backrefs = False
+    column_list = [c_attr.key for c_attr in inspect(ReadLog).mapper.column_attrs]
+
+admin.add_view(UserModelView(User, db.session, u'订阅用户'))
+admin.add_view(ArticleModelView(RecommendArticle, db.session, u'推送文章'))
+admin.add_view(RecordModelView(ReadLog, db.session, u'阅读记录'))
 #admin = flask_admin.Admin(app, name='推送文章后台管理系统', template_mode='bootstrap4')
 #admin.add_view(sqla.ModelView(User, db.session))
 
-sendAll()
+# sendAll()
 
 @login_manager.user_loader
 def load_user(phone):
@@ -226,123 +241,27 @@ def index(type):
     # data = {}   # 从数据库获取文章数据，字典元素格式如下：key：文章所属板块，value：字典格式，{"url":"","title":"","from":"","article_id":""}
     # 待完成：在data字典中存入最新的若干条数据,对应key：latest
     # 待完成：根据模型，得到向用户推荐的若干条数据，在data字典中存入，受模型大小的影响，这一过程可能会比较耗时，拟采取ajax请求的方式获取
-    data = {
-        "latest": [
-            {
-            "url":"https://www.cn-healthcare.com/articlewm/20201227/content-1175558.html",
-            "title":"关于肺小结节的实用科普",
-            "from":"专家十问十答",
-            "article_id":1,
-            },
-            {
-            "url":"http://www.gzsums.net/news_25683.aspx",
-            "title":"肝、肾离开人体依然可活多天 人离体活器官支持系统亮相广州",
-            "from":"南方都市报",
-            "article_id":2,
-            },
-            {
-            "url":"https://m.sohu.com/a/440927209_120967",
-            "title":"健康大咖谈|打赢健康保“胃”战",
-            "from":"搜狐",
-            "article_id":3,
-            },
-            {
-            "url":"http://kpzg.people.com.cn/n1/2020/1010/c404214-31886402.html",
-            "title":"塑料瓶装水经过暴晒会致癌？",
-            "from":"人民网",
-            "article_id":4,
-            },
-            {
-            "url":"http://lxjk.people.cn/n1/2020/1218/c404177-31970835.html",
-            "title":"15岁男孩患结肠癌",
-            "from":"5个信号要警惕",
-            "article_id":5,
-            },
-            {
-            "url":"http://www.kepuchina.cn/more/202012/t20201224_2912255.shtml",
-            "title":"首张不同癌症人体转移图问世",
-            "from":"科普 中国",
-            "article_id":1,
-            },
-            {
-            "url":"https://3g.163.com/dy/article/FUJV8Q0505118405.html?spss=adap_pc",
-            "title":"哪些人更容易得癌症？肿瘤医生：这五类人",
-            "from":"网易新闻",
-            "article_id":2,
-            },
-            {
-            "url":"http://hi.people.com.cn/n2/2020/1224/c231190-34493303.html",
-            "title":"中国癌症基金会“肺越未来”肺癌患者关爱项目落地海南",
-            "from":"人民网",
-            "article_id":3,
-            },
-            {
-            "url":"https://m.sohu.com/a/439622957_359980/?pvid=000115_3w_a",
-            "title":"华西科普 | 癌症会遗传、有传染性？专家：不是一份基因检测报告就能判断",
-            "from":"搜狐健康",
-            "article_id":4,
-            },
-
-            {
-                "url": "http://health.people.com.cn/n1/2020/1222/c14739-31974499.html",
-                "title": "坏情绪助推肿瘤发展 5种饮品改善情绪",
-                "from": "来源：人民网",
-                "article_id": 1
-            },
-            {
-                "url": "http://health.people.cn/n1/2020/1223/c14739-31976041.html",
-                "title": "高发的子宫肌瘤该拿它怎么办",
-                "from": "来源：人民网",
-                "article_id": 1
-            },
-            {
-                "url": "https://www.medsci.cn/article/show_article.do?id=a1c120458837",
-                "title": "世卫大会首次承诺要消除宫颈癌！女孩子都应该看的HPV疫苗科普干货",
-                "from": "来源：MedSci梅斯医生",
-                "article_id": 1
-            },
-            {
-                "url": "https://3g.163.com/local/article/FUCNN2BU04398SNN.html?from=dynamic",
-                "title": "16位肉瘤专家亲情奉献 中国首部软组织肉瘤领域科普书正式发布",
-                "from": "来源：网易新闻",
-                "article_id": 2
-            },
-            {
-                "url": "http://www.cdctj.com.cn/system/2020/12/22/030041461.shtml",
-                "title": "癌症知否：数学公式区分癌症和肿瘤",
-                "from": "来源：CCFDIE平台",
-                "article_id": 1
-            },
-            {
-                "url": "http://www.caca.org.cn/system/2020/11/24/020046703.shtml",
-                "title": "【防癌早知道】肺癌关注月：化疗在肺癌治疗中有何作用？",
-                "from": "中国抗癌协会",
-                "article_id": 50,
-            },
-            {
-                "url": "https://www.kepuchina.cn/more/202012/t20201222_2907038.shtml",
-                "title": "只在癌细胞内溶解的载药纳米颗粒",
-                "from": "科普中国",
-                "article_id": 50,
-            },
-            {
-                "url": "https://m.thepaper.cn/newsDetail_forward_10495309",
-                "title": "科普丨癌症来之前，都会经历“癌前病变”",
-                "from": "澎湃新闻",
-                "article_id": 50,
-            },
-            {
-                "url": "http://www.xinhuanet.com/science/2019-04/19/c_137990321.htm",
-                "title": "谈到肿瘤就害怕？这些说法不可信",
-                "from": "新华网",
-                "article_id": 50,
-            },
-
-        ],
-        "recommend": recommend["recommend"]
-    }
-    # print("feiai:",recommend["recommend"])
-    return render_template("index.html", data=data)
+    data_db = db.session.query(RecommendArticle).filter_by(article_tag=type)
+    data2 = {
+        "latest":[],
+        "recommend":[]
+        }
+    for line in data_db:
+        data2["recommend"].append({
+            "url": line.get_article_link(),
+            "title": line.get_article_title(),
+            "from": line.get_article_source(),
+            "article_id": line.get_id(),
+        })
+    data_latest = db.session.query(RecommendArticle).filter_by(article_tag='最新')
+    for line in data_latest:
+        data2["latest"].append({
+            "url": line.get_article_link(),
+            "title": line.get_article_title(),
+            "from": line.get_article_source(),
+            "article_id": line.get_id(),
+        })
+    return render_template("index.html", data=data2)
 
 
 @user.route('/callback', methods=["POST"])
