@@ -4,9 +4,9 @@ body {
     margin: 0 auto;
     color: #333;
     padding: 0;
-    font-family: "sans-serif";
+    font-family: -apple-system-font,"Helvetica Neue","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
     text-align: center;
-    background-color: #eeeeee;
+    background-color: #F1F1F1;
 }
 .container {
     /*width: 100%;*/
@@ -16,14 +16,15 @@ body {
     width: 100%;
 }
 .swiper1 .selected {
-    color: #0d7377;
-    border-bottom: 2px solid #0d7377;
+    color: #4D4D4D;
+    border-bottom: 2px solid #2BA245;
 }
 .swiper1 .swiper-slide {
     text-align: center;
     font-size: 20px;
     height: 80px;
     width: 100px;
+    font-weight: bold;
     /* Center slide text vertically */
     display: -webkit-box;
     display: -ms-flexbox;
@@ -45,7 +46,7 @@ body {
 .swiper2 .swiper-slide {
     height: calc(100vh - 50px);
     background-color: #eeeeee;
-    color: #4facfe;
+    color: #2BA245;
     text-align: center;
     box-sizing: border-box !important;
     overflow-x: hidden !important;
@@ -65,22 +66,13 @@ body {
 
 }
 .close_btn{
-    width: 100%;
+    width: 97%;
     height: 40px;
     text-align: center;
     background: #f1f1f1;
+    color: #2BA245;
     border-radius: 12px;
-    &:after {
-        content: "";
-        display: block;
-        position: absolute;
-        width: 50%;
-        height: 10%;
-        border-radius: 50%;
-        background-color: darken(#f1c40f, 20%);
-        opacity: 0.4;
-        bottom: -30px;
-      }
+    margin: 3px;
 }
 
 
@@ -120,7 +112,7 @@ body {
     margin: 0;
 }
 .feedback{
-    background-color: #FAF0E6;
+    background-color: #AAAAAA;
     position: relative;
     height: 30px;
     float: right;
@@ -129,25 +121,26 @@ body {
 
 /* 不感兴趣样式*/
 .limitRecommend{
-    color:#777777;
+    color:#888888;
 }
 
 .myurl{
-    color: #EA5A70;
+    color: #4D4D4D;
     font-size: medium;
     margin-top: 100px;
     cursor: pointer;
+    font-weight: bolder;
     overflow-wrap: break-word;
 }
 
 .navigation1{
-    color: #EA5A70;
+    color: #4D4D4D;
     font-size: medium;
     
 }
 
 .navigation2{
-    color: #EA5A70;
+    color: #4D4D4D;
     font-size: medium;
 }
 

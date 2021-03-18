@@ -52,10 +52,11 @@ class ReadLog(db.Model):
     def __repr__(self):
         return '<ReadLog %r | %r>' % (self.username, self.read_link)
 
-    def __init__(self,name,phone,link):
+    def __init__(self,name,phone,link,read_time):
         self.username = name
         self.phone_num = phone
         self.read_link = link
+        self.time = read_time
 
 class SurveyResult(db.Model):
     __tablename__ = 'survey_result'

@@ -291,8 +291,9 @@ def addReadingRecord():
     read_link = request.json.get("read_link")
     username = current_user.get_username()
     phone = current_user.get_phone()
+    read_time = random.randint(1,60)
     print("现在向数据库写入阅读记录数据:"+phone+"|"+username+"|"+read_link)
-    read_log = ReadLog(username,phone,read_link)
+    read_log = ReadLog(username,phone,read_link,read_time)
     db.session.add(read_log)
     db.session.commit()
     return jsonify({
